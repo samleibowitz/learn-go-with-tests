@@ -54,3 +54,7 @@ Nothing too complicated here, just adding another language...
 ## 1.4 French (and switch)
 
 Ew. Switch statements.
+
+## 1.5 One last refactor
+
+Move that annoying switch into its own jawn.
