@@ -1,4 +1,4 @@
-# Hello World
+# 1.0 Hello World
 
 ## Modules
 It's required that your code live in some kind of module as of Go 1.16 and later. To generate your module, you need to type `go mod init hello`, (in this case, `hello` is the module name).
@@ -19,6 +19,24 @@ ok      hello   0.607s
 - requires that you `import "testing"`
   
 ## Other fun stuff
-- browse a living document server by running `godoc -http :8000` (to run it on port 8000). Needs a manual install lately - but you get it with `go get golang.org/x/tools/cmd/godoc` anymore. Try `go install golang.org/x/tools/cmd/godoc@latest` instead.  **This was absolutetly no working on my install and it's killing me, figure it out later.**
+- browse a living document server by running `godoc -http=localhost:6060` (to run it on port 6060). Needs a manual install lately - but you can't get it with `go get golang.org/x/tools/cmd/godoc` anymore. Try `go install golang.org/x/tools/cmd/godoc@latest` instead.
+  
+IMPORTANT NOTE: The official Go installer doesn't set `GOPATH` or add it to your command path. I edited my `.zshrc` as follows:
+```shell
+# Add GOPATH
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
 
+## 1.1 Hello, YOU
 
+Note the way that `go test` reports errors in this case.
+
+```
+❯ go test
+# hello [hello.test]
+./hello_test.go:6:14: too many arguments in call to Hello
+        have (string)
+        want ()
+FAIL    hello [build failed]
+```
