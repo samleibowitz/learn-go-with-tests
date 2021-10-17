@@ -50,3 +50,7 @@ Tests in Go can contain sub-tests. Since the subtests can vary on what parameter
 ## 1.3 Keep Going! More requirements
 
 Nothing too complicated here, just adding another language...
+
+## 1.4 French (and switch)
+
+Ew. Switch statements.
