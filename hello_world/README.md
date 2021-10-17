@@ -40,3 +40,10 @@ Note the way that `go test` reports errors in this case.
         want ()
 FAIL    hello [build failed]
 ```
+
+## 1.2 Hello world... again
+
+Notice that we're not making use of a default parameter here, just an empty string.
+
+Tests in Go can contain sub-tests. Since the subtests can vary on what parameters are passed, there may be a way to express something similar to RSpec's contexts here.
+
