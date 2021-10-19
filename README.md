@@ -8,3 +8,5 @@ I'm trying to use my own weird version of SemVer here: major revisions correspon
 
 1. [Hello World](hello_world/README.md)
 2. [Integers](integers/README.md)
+3. [Iteration](iteration/README.md)
+4. 
