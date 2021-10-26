@@ -1,12 +1,9 @@
 package main
 
-func Sum(numbers [5]int) int {
-
-	total := 0
-
+func Sum(numbers []int) int {
+	sum := 0
 	for _, number := range numbers {
-		total += number
+		sum += number
 	}
-
-	return total
+	return sum
 }
