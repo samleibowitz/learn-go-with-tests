@@ -58,6 +58,15 @@ Honestly not sure why you wouldn't run it with the -cover option all the time.
 
 We used the `reflect` package to be able to compare two slices (using `reflect.DeepEqual`). It's not type safe, so in theory we could do `reflect.DeepEqual("freddie", 6)` and the compiler won't complain.
 
+Notice that we make another convenience function for our tests again called `checkSums`:
 
+```go
+	checkSums := func(t testing.TB, got, want []int) {
+		t.Helper() // means "This function is a test helper, you can mostly ignore me" https://pkg.go.dev/testing?utm_source=gopls#T.Helper
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	}
 
+```
 
