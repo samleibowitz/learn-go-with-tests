@@ -26,6 +26,14 @@ my_array := [5]int{0, 1, 2, 3, 4, 5}
 my_slice := []int{0, 1, 2, 3}
 ```
 
+We can use `len`  to get the length of a slice (wouldn't have to for an array, since they're of fixed length in Go).  And we can use `make` to generate a new one, like the following:
+
+```go
+    lengthOfNumbers := len(numbersToSum)
+    sums := make([]int, lengthOfNumbers)
+```
+
+`make` is a built-in function that works to construct slices, maps, or chans. 
 ## A couple of words about tests
 
 The author introduces the built-in test coverage tool, which is run with the `-cover` argument:
@@ -41,3 +49,11 @@ ok      arrays-and-slices/arrays-and-slices     0.631s
 ```
 
 Honestly not sure why you wouldn't run it with the -cover option all the time.
+
+## More about Testing and Comparisons
+
+We used the `reflect` package to be able to compare two slices (using `reflect.DeepEqual`). It's not type safe, so in theory we could do `reflect.DeepEqual("freddie", 6)` and the compiler won't complain.
+
+
+
+
