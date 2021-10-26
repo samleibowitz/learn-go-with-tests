@@ -36,6 +36,8 @@ We can use `len`  to get the length of a slice (wouldn't have to for an array, s
 `make` is a built-in function that works to construct slices, maps, or chans. 
 
 We can use `append` to add stuff to the end of a slice, although it is technically returning a copy of the original slice (with the new thingy tacked on)
+
+We can get a subsection of a slice (slicing a slice!) by using the `:` operator inside the array index. For example, `mySlice[2:]` will get everything from the 3rd item (remember, it's an array index) to the end.
 ## A couple of words about tests
 
 The author introduces the built-in test coverage tool, which is run with the `-cover` argument:
