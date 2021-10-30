@@ -39,3 +39,31 @@ type Shape interface {
 
 So when we call it with something like `shape.Area()`, we're literally saying "I may not know specifically what type `shape` is, but I know it has to support the Area method."
 
+## Table driven tests
+
+A table driven tesst is just tan abstraction for testing when you need to work against a bunch of different values and expected results.  For example, how often have you written bullshit like this in RSpec?
+
+```ruby
+describe "Square"
+	describe "#area"
+		context "when the radius is 1"
+			let(:circle) { Circle.new(radius: 1)}
+		  expect(circle.area).to eq (Math.Pi)
+		end
+
+		context "when it's some other bullshit"
+		...
+```
+
+Table driven tests let you capture a series of inputs and outputs to run tests more easily. There's an array of structs consisting of a shape and a "want" value for each. We call our function on each shape and compare the result to the want value:
+
+```go
+	for _, tt := range areaTests {
+		got := tt.shape.Area()
+		if got != tt.want {
+			t.Errorf("got %g want %g", got, tt.want)
+		}
+	}
+```
+
+Note that hardcore RSpeccers would probably say that this violates the single expectation rule, to which I say, F that, sometimes the single expectation rule sucks.
