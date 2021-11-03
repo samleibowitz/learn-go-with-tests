@@ -11,3 +11,4 @@ I'm trying to use my own weird version of SemVer here: major revisions correspon
 3. [Iteration](iteration/README.md)
 4. [Arrays and Slices](arrays-and-slices/README.md)
 5. [Structs, Methods, and Interaces](structs-methods-interfaces/README.md)
+6. [Pointers and Errors](pointers-and-errors/README.md)
