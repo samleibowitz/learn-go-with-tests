@@ -79,3 +79,22 @@ func (w *Wallet) Withdraw(amount Bitcoin) error {
 	return nil
 }
 ```
+
+## Using errcheck
+
+`errcheck` is a linter for Go, which can help identify when you missed checking on a specific error. I installed it with
+
+```
+go get -u github.com/kisielk/errcheck
+```
+
+This told us that in the success case, we haven't checked to ensure that there's no error being returned, so we add a test that checks for the error:
+
+```go
+func assertNoError(t testing.TB, got error) {
+	t.Helper()
+	if got != nil {
+		t.Fatal("got an error but didn't want one")
+	}
+}
+```
