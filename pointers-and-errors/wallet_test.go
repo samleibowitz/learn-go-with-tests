@@ -6,14 +6,43 @@ import (
 
 func TestWallet(t *testing.T) {
 
-	wallet := Wallet{}
+	t.Run("Deposit", func(t *testing.T) {
+		wallet := Wallet{}
+		wallet.Deposit(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
+	})
 
-	wallet.Deposit(10)
+	t.Run("Withdraw with funds", func(t *testing.T) {
+		wallet := Wallet{Bitcoin(20)}
+		wallet.Withdraw(Bitcoin(10))
+		assertBalance(t, wallet, Bitcoin(10))
+	})
 
+	t.Run("Withdraw insufficient funds", func(t *testing.T) {
+		wallet := Wallet{Bitcoin(20)}
+		err := wallet.Withdraw(Bitcoin(100))
+
+		assertError(t, err, ErrInsufficientFunds)
+		assertBalance(t, wallet, Bitcoin(20))
+	})
+}
+
+func assertBalance(t testing.TB, wallet Wallet, want Bitcoin) {
+	t.Helper()
 	got := wallet.Balance()
-	want := 10
 
 	if got != want {
-		t.Errorf("got %d want %d", got, want)
+		t.Errorf("got %q want %q", got, want)
+	}
+}
+
+func assertError(t testing.TB, got, want error) {
+	t.Helper()
+	if got == nil {
+		t.Fatal("didn't get an error but wanted one")
+	}
+
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
 	}
 }
