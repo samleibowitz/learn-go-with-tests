@@ -13,3 +13,4 @@ I'm trying to use my own weird version of SemVer here: major revisions correspon
 5. [Structs, Methods, and Interaces](structs-methods-interfaces/README.md)
 6. [Pointers and Errors](pointers-and-errors/README.md)
 7. [Maps](maps/README.md)
+8. [Dependency Injectino](dependency-injection/README.md)
