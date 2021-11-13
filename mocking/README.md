@@ -67,6 +67,9 @@ It's... kinda fiendish. Again, this si a trip for someone like me who use used t
 
 ```ruby
 expect(foo).to receive(:bar).at_least(3).times
+```
+
+
 ## Odds and Ends
 
 I notice that Sleep seems to take milliseconds as its parameter by default. Huh.
