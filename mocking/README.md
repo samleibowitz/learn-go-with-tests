@@ -69,7 +69,20 @@ It's... kinda fiendish. Again, this si a trip for someone like me who use used t
 expect(foo).to receive(:bar).at_least(3).times
 ```
 
+And now, some direct quotes:
 
+> Mocking requires no magic and is relatively simple; using a framework can make mocking seem more complicated than it is. We don't use automocking in this chapter so that we get:
+> * a better understanding of how to mock
+> * practise implementing interfaces
+> 
+> In collaborative projects there is value in auto-generating mocks. In a team, a mock generation tool codifies consistency around the test doubles. This will avoid inconsistently written test doubles which can translate to inconsistently written tests.
+> You should only use a mock generator that generates test doubles against an interface. Any tool that overly dictates how tests are written, or that use lots of 'magic', can get in the sea.
+
+Huh. Well, that's a different approach.
+
+## A little more generic foo
+
+"Test Double" is the generic term for something that stands for somethign else in a test. Mocks, spies, stubs, etc all have a variety of meanings that can sorta get blended into each other in practice, but for a good discussion of what everything means, checkout out [this Martin Fowler post](https://martinfowler.com/bliki/TestDouble.html)
 ## Odds and Ends
 
 I notice that Sleep seems to take milliseconds as its parameter by default. Huh.
