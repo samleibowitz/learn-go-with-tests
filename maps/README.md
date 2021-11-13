@@ -6,7 +6,7 @@ Thinks Hashes or Dictionaries, depending on your language of choice.
 
 Maps never have to be dereferenced. That's because the type is itself "a pointer to a runtime.hmap structure", which sounds weird to me. Like, what if you want it frozen? Weird.
 
-Anyway, maps can have a nil value, but if you try to assign something to it it'll blow up.
+Anyway, maps can have a nil value, but if you try to assign something to it, it'll blow up.
 
 ```go
 var m map[string]string // DON'T DO THIS
