@@ -44,7 +44,29 @@ I don't love this, but I guess it might just be a mindset change. IMO, if you're
 
 (And yes, I know that Rspec for Ruby, not Go, but you get my drift. )
 
+## Spies
 
+DI is also how we wind up being able to spy. We create a type that can accept calls to `.Sleep` and `.Write`, which satisfy the requirements for both of `Countdown`'s arguments. Then we just pass it twice, using it to record every time one of its methods gets called.
+
+```go
+type SpyCountdownOperations struct {
+	Calls []string
+}
+
+func (s *SpyCountdownOperations) Sleep() {
+	s.Calls = append(s.Calls, sleep)
+}
+
+func (s *SpyCountdownOperations) Write(p []byte) (n int, err error) {
+	s.Calls = append(s.Calls, write)
+	return
+}
+```
+
+It's... kinda fiendish. Again, this si a trip for someone like me who use used to Rspec giving us access to stuff like
+
+```ruby
+expect(foo).to receive(:bar).at_least(3).times
 ## Odds and Ends
 
 I notice that Sleep seems to take milliseconds as its parameter by default. Huh.
