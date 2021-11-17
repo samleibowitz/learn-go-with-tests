@@ -137,3 +137,5 @@ Goroutine 8 (finished) created at:
     testing.go:1152: race detected during execution of test
 FAIL
 ```
+
+(I don't know if this actually means anything interesting, but: I used println from inside my thread and re-ran my race test - go thought it was peachy.)
