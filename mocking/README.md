@@ -82,7 +82,7 @@ Huh. Well, that's a different approach.
 
 ## A little more generic foo
 
-"Test Double" is the generic term for something that stands for somethign else in a test. Mocks, spies, stubs, etc all have a variety of meanings that can sorta get blended into each other in practice, but for a good discussion of what everything means, checkout out [this Martin Fowler post](https://martinfowler.com/bliki/TestDouble.html)
+"Test Double" is the generic term for something that stands for somethign else in a test. Mocks, spies, stubs, etc all have a variety of meanings that can sorta get blended into each other in practice, but for a good discussion of what everything means, check out [this Martin Fowler post](https://martinfowler.com/bliki/TestDouble.html).
 ## Odds and Ends
 
 I notice that Sleep seems to take milliseconds as its parameter by default. Huh.
