@@ -16,3 +16,4 @@ I'm trying to use my own weird version of SemVer here: major revisions correspon
 8. [Dependency Injection](dependency-injection/README.md)
 9. [Mocking](mocking/README.md)
 10. [Concurrency](concurrency/README.md)
+11. [Select](select/README.md)
