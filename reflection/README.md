@@ -28,6 +28,8 @@ r = new(bytes.Buffer)
 
 ## Problem discussion
 
+### Version 1: works for a single field.
+
 The task is, **write a function `walk(x interface{}, fn func(string))` which takes a struct x and calls fn for all strings fields found inside. difficulty level: recursively.**
 
 Our first version just assumed there's a single field and that it's a stringifiable one.
@@ -37,5 +39,19 @@ func walk(x interface{}, fn func(input string)) {
 	val := reflect.ValueOf(x)
 	field := val.Field(0)
 	fn(field.String())
+}
+```
+
+### Version 2: works for multiple string fields
+
+
+```go
+func walk(x interface{}, fn func(input string)) {
+	val := reflect.ValueOf(x)
+
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+		fn(field.String())
+	}
 }
 ```
