@@ -91,6 +91,7 @@ func walk(x interface{}, fn func(input string)) {
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
 
+    // cast the struct to an empty Interface. (A little weird, but okay)
 		if field.Kind() == reflect.Struct {
 			walk(field.Interface(), fn)
 		}
