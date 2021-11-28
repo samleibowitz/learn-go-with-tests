@@ -44,6 +44,26 @@ func walk(x interface{}, fn func(input string)) {
 
 ### Version 2: works for multiple string fields
 
+Our second version iterates over the number of fields in the interface
+
+```go
+func walk(x interface{}, fn func(input string)) {
+  // The value of x here is the actual value of the passed variable.
+	val := reflect.ValueOf(x)
+
+  // Here we iterate over its fields...
+	for i := 0; i < val.NumField(); i++ {
+    // ...and call the passed function on each 
+		field := val.Field(i)
+		fn(field.String())
+	}
+}
+```
+
+### Version 3: works for multiple string and non-string (but still flat) values
+
+
+Version 3 lets us throw in an int or somthing and assures us that it'll be skipped over.
 
 ```go
 func walk(x interface{}, fn func(input string)) {
@@ -51,7 +71,12 @@ func walk(x interface{}, fn func(input string)) {
 
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
-		fn(field.String())
+
+    // field.Kind() gets us the kind of field it is, durr.
+		if field.Kind() == reflect.String {
+			fn(field.String())
+		}
 	}
 }
 ```
+
