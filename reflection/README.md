@@ -80,3 +80,23 @@ func walk(x interface{}, fn func(input string)) {
 }
 ```
 
+### Version 4: works for nested structs!
+
+Note in this version that if we're passing a struct, we have to cast it to an Interface.
+
+```go
+func walk(x interface{}, fn func(input string)) {
+	val := reflect.ValueOf(x)
+
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+
+		if field.Kind() == reflect.Struct {
+			walk(field.Interface(), fn)
+		}
+		if field.Kind() == reflect.String {
+			fn(field.String())
+		}
+	}
+}
+```
