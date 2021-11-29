@@ -101,3 +101,13 @@ func walk(x interface{}, fn func(input string)) {
 	}
 }
 ```
+
+### Version 5: works on pointers!
+
+Made it work with just the addition of:
+
+```go
+	if val.Kind() == reflect.Ptr {
+		val = val.Elem()
+	}
+```
