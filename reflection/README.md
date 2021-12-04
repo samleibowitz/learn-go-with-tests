@@ -26,11 +26,11 @@ r = new(bytes.Buffer)
 
 ```
 
-## Problem discussion
+## The Assignment
+
+**Write a function `walk(x interface{}, fn func(string))` which takes a struct x and calls fn for all strings fields found inside. difficulty level: recursively.**
 
 ### Version 1: works for a single field.
-
-The task is, **write a function `walk(x interface{}, fn func(string))` which takes a struct x and calls fn for all strings fields found inside. difficulty level: recursively.**
 
 Our first version just assumed there's a single field and that it's a stringifiable one.
 
@@ -107,7 +107,12 @@ func walk(x interface{}, fn func(input string)) {
 Made it work with just the addition of:
 
 ```go
+  // Reflect's Kind() function returns a string with 
+	// the type of the referent. reflect.Ptr is just 
+	// a constant.
 	if val.Kind() == reflect.Ptr {
 		val = val.Elem()
 	}
 ```
+
+We refactored it to move the pointer dereferencing stuff into its own function.
