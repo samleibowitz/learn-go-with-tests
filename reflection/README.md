@@ -199,3 +199,22 @@ func walk(x interface{}, fn func(input string)) {
 	}
 }
 ```
+
+### Version 8: Let's clean up that map behavior a bit.
+
+Here we're just fixing a test because we're not guaranteed the ordering of elements inside the map. We created a helper method called assertContains().
+
+```golang
+func assertContains(t testing.TB, haystack []string, needle string) {
+	t.Helper()
+	contains := false
+	for _, x := range haystack {
+		if x == needle {
+			contains = true
+		}
+	}
+	if !contains {
+		t.Errorf("expected %+v to contain %q but it didn't", haystack, needle)
+	}
+}
+```
