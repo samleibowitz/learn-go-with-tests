@@ -218,3 +218,24 @@ func assertContains(t testing.TB, haystack []string, needle string) {
 	}
 }
 ```
+
+### Version 9: Now let's add channels.
+
+Warning: this is where the use case is, in my considered opinion, weird. Is a channel something you'd really want to pass to a recursive function like this? But nevertheless!
+
+```golang
+    // blah blah blah
+    case reflect.Chan:
+		    // Start by receving a value from the channel
+				// As long as the channel is still open (ok == true)
+				// receive another value from the channel
+				// and call walkValue() on the result. 
+        for v, ok := val.Recv(); ok; v, ok = val.Recv() {
+            walkValue(v)
+        }
+    }
+
+```
+
+Note that this could be used to apply the function to everything that the channel receives, until the goroutine on the other end is done... which means it could blow up your execution time. But it fulfills the requirement!
+
