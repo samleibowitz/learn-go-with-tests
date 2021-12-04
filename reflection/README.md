@@ -164,3 +164,38 @@ func walk(x interface{}, fn func(input string)) {
     }
 }
 ```
+
+Adding support for Arrays isn't eveen worth mentioning.
+
+### Version 7: Okay, what about Maps?
+
+Our first iteration is kinda gross, because it relies on special behavior for the Map case - in that case, it's calling walk right in the switch statement. But it works and we're gonna commit it like that for now.
+
+```golang
+func walk(x interface{}, fn func(input string)) {
+	val := getValue(x)
+
+	numberOfValues := 0
+	var getField func(int) reflect.Value
+
+	switch val.Kind() {
+	case reflect.String:
+		fn(val.String())
+	case reflect.Struct:
+		numberOfValues = val.NumField()
+		getField = val.Field
+	case reflect.Slice, reflect.Array:
+		numberOfValues = val.Len()
+		getField = val.Index
+  // Here's the grody bit.
+	case reflect.Map:
+		for _, key := range val.MapKeys() {
+			walk(val.MapIndex(key).Interface(), fn)
+		}
+	}
+
+	for i := 0; i < numberOfValues; i++ {
+		walk(getField(i).Interface(), fn)
+	}
+}
+```
