@@ -116,3 +116,51 @@ Made it work with just the addition of:
 ```
 
 We refactored it to move the pointer dereferencing stuff into its own function.
+
+### Version 6: Okay, but what if we get a slice?
+
+We added this bit:
+```go
+  // if the thing we got passed is a slice
+	if val.Kind() == reflect.Slice {
+		// iterate over the slice and then
+		for i := 0; i < val.Len(); i++ {
+			// cast each element of thee slice to an empty Interface and call walk() on it.
+			walk(val.Index(i).Interface(), fn)
+		}
+		return
+	}
+``` 
+
+Which is gross, but still works. We eventually refactor it to make it less gross, though. We did it with some crazy shit.
+
+```go
+func walk(x interface{}, fn func(input string)) {
+    val := getValue(x)
+
+    numberOfValues := 0
+		// Here, we're building a general purpose method to get values
+		// from somthing inside a container. We create a varable called 
+		// getField, which holds a reference to a function
+    var getField func(int) reflect.Value
+
+    switch val.Kind() {
+    case reflect.String:
+        fn(val.String())
+    case reflect.Struct:
+        numberOfValues = val.NumField()
+				// if we're walking a Struct, getField will behave likee val.Field. (I mean,
+				// it will actually BE val.Field)
+        getField = val.Field
+    case reflect.Slice:
+        numberOfValues = val.Len()
+				// And if it's a Slice, it'll behave like val.Index
+        getField = val.Index
+    }
+
+    for i:=0; i< numberOfValues; i++ {
+			  // Now we just call walk() with our magically adapted function getField.
+        walk(getField(i).Interface(), fn)
+    }
+}
+```
