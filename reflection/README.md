@@ -239,3 +239,17 @@ Warning: this is where the use case is, in my considered opinion, weird. Is a ch
 
 Note that this could be used to apply the function to everything that the channel receives, until the goroutine on the other end is done... which means it could blow up your execution time. But it fulfills the requirement!
 
+### Version 10: And finally, functions!
+
+```golang
+  // if the thing we're evaluating is a func
+	case reflect.Func:
+	  // call it with nil as a parameter
+		result := val.Call(nil)
+		// iterate over the result (in our test case, it's a tuple), and call walkValue on each. 
+		// We toss the index since we don't care
+		for _, res := range result {
+			walkValue(res)
+		}
+	}
+```
