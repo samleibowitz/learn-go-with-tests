@@ -12,7 +12,7 @@ Okay, so this one I guessed.
 
 It's worth briefly going over the test itself in this version.
 
-`sync.WaitGroup` tracks a number of goroutines then waits for them to be done. Here, we're going to start up 1000 goroutines, each one of which is going to increment our counter by one. So the result SHOULD be 1000... but without a thread safe counter, it almost certainlyu won't work.
+`sync.WaitGroup` tracks a number of goroutines then waits for them to be done. Here, we're going to start up 1000 goroutines, each one of which is going to increment our counter by one. So the result SHOULD be 1000... but without a thread safe counter, it almost certainly won't work.
 
 ```golang
 	t.Run("it runs safely concurrently", func(t *testing.T) {
