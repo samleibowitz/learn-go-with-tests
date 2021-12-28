@@ -26,4 +26,3 @@ func Server(store Store) http.HandlerFunc {
 
 Our `Server` function take a `Store` as a parameter and sends back an `http.Handler` function. (Remember that handler? We used it [back in our greet example](../select/README.md).) The handler function takes a `ResponseWriter` and a `Request`, and writes some stuff out to the response - specifically, the formatted output of `store.Fetch()`.
 
-If we pass a `Store` into that `Server` function, we 
