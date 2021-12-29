@@ -20,3 +20,4 @@ I'm trying to use my own weird version of SemVer here: major revisions correspon
 12. [Reflection](reflection/README.md)
 13. [Sync](sync/README.md)
 14. [Context](context/README.md)
+15. [Intro to property based tests](/property-based-tests/README.md)
