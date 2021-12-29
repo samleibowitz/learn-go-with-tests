@@ -1,38 +1,25 @@
 package context1
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 )
 
 // Store fetches data.
 type Store interface {
-	Fetch() string
-	Cancel()
+	Fetch(ctx context.Context) (string, error)
 }
 
 // Server returns a handler for calling Store.
 func Server(store Store) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		data, err := store.Fetch(r.Context())
 
-		// get the context from the request
-		ctx := r.Context()
-
-		// Our long-running request will need a way to report back
-		data := make(chan string, 1)
-
-		go func() {
-			data <- store.Fetch()
-		}()
-
-		// One of the following things is gonna happen:
-		select {
-		// either our goroutine is going to report back using our data channel
-		case d := <-data:
-			fmt.Fprint(w, d)
-		// or that context is going to be terminated, in which case we need to cancel out of it.
-		case <-ctx.Done():
-			store.Cancel()
+		if err != nil {
+			return // This is where you'd normally log an error
 		}
+
+		fmt.Fprint(w, data)
 	}
 }
