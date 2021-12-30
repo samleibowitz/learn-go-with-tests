@@ -4,5 +4,8 @@
 
 F yeah, let's do this.
 
-> ...let's start with 1.
+## (some time later)
 
+Okay, so I've commented all the bits in the actual solution that I thought were worth commenting.
+
+Now it's time to talk about property based tests.
