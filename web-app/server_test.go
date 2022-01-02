@@ -21,4 +21,3 @@ func TestGETPlayers(t *testing.T) {
 		}
 	})
 }
- m
