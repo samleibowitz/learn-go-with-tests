@@ -2,7 +2,7 @@ package main
 
 import "strings"
 
-func ConvertToArabic(roman string) (total int) {
+func ConvertToArabic(roman string) (total uint16) {
 	// Loops over the string representation in roman...
 	for _, symbols := range windowedRoman(roman).Symbols() {
 		// ...incrementing a running total by the value of the current bit.
@@ -11,7 +11,7 @@ func ConvertToArabic(roman string) (total int) {
 	return
 }
 
-func ConvertToRoman(arabic int) string {
+func ConvertToRoman(arabic uint16) string {
 	var result strings.Builder
 
 	for _, numeral := range allRomanNumerals {
@@ -25,13 +25,13 @@ func ConvertToRoman(arabic int) string {
 }
 
 type romanNumeral struct {
-	Value  int
+	Value  uint16
 	Symbol string
 }
 
 type romanNumerals []romanNumeral
 
-func (r romanNumerals) ValueOf(symbols ...byte) int {
+func (r romanNumerals) ValueOf(symbols ...byte) uint16 {
 	symbol := string(symbols)
 	for _, s := range r {
 		if s.Symbol == symbol {
@@ -81,7 +81,7 @@ func (w windowedRoman) Symbols() (symbols [][]byte) {
 		// So here's a clever bit
 		// notAtEnd does what it says on the tin.
 		// isSubtractive(symbol) just tells you if a given symbol _could_ be subtractive.
-		// the call to .exists checks if the next _two_ symbols are counted (e.g., IV)
+		// the call to .exists checks if the next _two_ symbols are counted (eg,)
 		if notAtEnd && isSubtractive(symbol) && allRomanNumerals.Exists(symbol, w[i+1]) {
 			symbols = append(symbols, []byte{symbol, w[i+1]})
 			i++
